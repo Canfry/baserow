@@ -13,8 +13,20 @@ async function loadData(){
 	return data;
 }
 
+async function loadHeaders(){
+	const response = await fetch(`${import.meta.env.LOCATIONS_FIELDS_BASE_URL}`, {
+		headers: {
+			'Authorization': `Token ${import.meta.env.API_KEY}`
+		}
+	});
+	const data = await response.json();
+	return data;
+}
+
 const { results } = await loadData();
+const headers = await loadHeaders();
 console.log(results.length);
+console.log(headers);
 ---
 
 <Layout title="Interest.">
@@ -22,7 +34,7 @@ console.log(results.length);
 		<h1 class='text-black'>Hello</h1>	
 		{results.map((location) => (
 			<div>
-				<h2>{location.field_1855896}</h2>
+				<h2>{location.City}</h2>
 			</div>
 		))}	
 	</main>
