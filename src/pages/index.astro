@@ -8,7 +8,7 @@ async function loadData() {
         },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
 }
 
@@ -28,7 +28,7 @@ async function loadHeaders() {
 const { results } = await loadData();
 const headers = await loadHeaders();
 // console.log(results.length);
-console.log(headers);
+// console.log(headers);
 ---
 
 <Layout title="Interest.">

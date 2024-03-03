@@ -1,8 +1,80 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 
+if (Astro.request.method === 'POST') {
+	const body = await Astro.request.formData()
+	const name = body.get('name')
+	const location = body.get('location')
+	const type = body.get('type')
+	const rating = body.get('rating')
+	const city = body.get('city')
+	const country = body.get('country')
+
+	const data = {
+		'Name': name,
+		'Location': location,
+		'Type': type,
+		'Rating': rating,
+		'City': city,
+		'Country': country
+	}
+
+	console.log(data)
+
+	
+
+	// redirect to the home page
+		await fetch(`${import.meta.env.LOCATIONS_ROWS_BASE_URL}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Token ${import.meta.env.API_KEY}`
+			},
+			body: JSON.stringify(data)	
+		})
+		.then(response => response.json())
+		.then(data => console.log(data))
+		.catch(error => console.log(error))
+		return Astro.redirect('/')
+}
+
 ---
 
 <Layout title='form'>
-	<h1>Form</h1>
+	<main class='flex flex-col items-center'>
+		<form method='POST' class='flex flex-col items-start gap-y-4 mb-16'>
+			<h1 class='text-4xl text-slate-700 font-bold'>Add a new point of interest.</h1>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="name" class='font-bold text-lg text-slate-500'>Name:</label>
+				<input type="text" id="name" name="name" placeholder='Enter the name' class='p-2 px-3 rounded-md bg-slate-100 w-full'/>
+			</div>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="location" class='font-bold text-lg text-slate-500'>Location: (paste the Google Maps URL)</label>
+				<input type="text" id="location" name="location" placeholder='Google Maps URL' class='p-2 px-3 rounded-md bg-slate-100 w-full' />
+			</div>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="type" class='font-bold text-lg text-slate-500'>Type:</label>
+				<input type="text" id="type" name="type" placeholder='Restaurant, Museum...' class='p-2 px-3 rounded-md bg-slate-100 w-full' />
+			</div>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="rating" class='font-bold text-lg text-slate-500'>Rating:</label>
+				<select name="rating" class='bg-slate-100'>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="city" class='font-bold text-lg text-slate-500'>City:</label>
+				<input type="text" id="city" name="city"  placeholder='Enter the city' class='p-2 px-3 rounded-md bg-slate-100 w-full'/>
+			</div>
+			<div class='flex flex-col items-start gap-y-1 w-full'>
+				<label for="name" class='font-bold text-lg text-slate-500'>Country:</label>
+				<input type="text" id="country" name="country" placeholder='Enter the country' class='p-2 px-3 rounded-md bg-slate-100 w-full'/>
+			</div>
+			<button type='submit' class='bg-slate-700 text-white p-2 px-4 rounded-md'>Submit</button>
+		</form>
+	</main>
 </Layout>
