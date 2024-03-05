@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Search from "../components/Search.tsx";
 
 async function loadData() {
     const response = await fetch(`${import.meta.env.LOCATIONS_ROWS_BASE_URL}`, {
@@ -33,6 +34,7 @@ const headers = await loadHeaders();
 
 <Layout title="Interest.">
     <main class="mt-8 max-w-[90%] m-auto">
+		<Search client:load results={results}/>
         <div class="overflow-x-auto">
             <table class="table w-full">
                 {/* head */}
