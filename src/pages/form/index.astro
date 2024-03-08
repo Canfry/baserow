@@ -22,11 +22,11 @@ if (Astro.request.method === "POST") {
     console.log(data);
 
     // redirect to the home page
-    await fetch(`${import.meta.env.LOCATIONS_ROWS_BASE_URL}`, {
+    await fetch(`${import.meta.env.PUBLIC_LOCATIONS_ROWS_BASE_URL}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Token ${import.meta.env.API_KEY}`,
+            Authorization: `Token ${import.meta.env.PUBLIC_API_KEY}`,
         },
         body: JSON.stringify(data),
     })
