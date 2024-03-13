@@ -3,12 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 
 if (Astro.request.method === "POST") {
     const body = await Astro.request.formData();
-    const name = body.get("name") as string;
-    const location = body.get("location") as string;
-    const type = body.get("type") as string;
-    const rating = body.get("rating") as number;
-    const city = body.get("city") as string;
-    const country = body.get("country") as string;
+    const name = body.get("name");
+    const location = body.get("location");
+    const type = body.get("type");
+    const rating = body.get("rating");
+    const city = body.get("city");
+    const country = body.get("country");
 
     const data = {
         Name: name,
