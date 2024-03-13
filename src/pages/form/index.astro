@@ -3,12 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 
 if (Astro.request.method === "POST") {
     const body = await Astro.request.formData();
-    const name = body.get("name");
-    const location = body.get("location");
-    const type = body.get("type");
-    const rating = body.get("rating");
-    const city = body.get("city");
-    const country = body.get("country");
+    const name = body.get("name") as string;
+    const location = body.get("location") as string;
+    const type = body.get("type") as string;
+    const rating = body.get("rating") as number;
+    const city = body.get("city") as string;
+    const country = body.get("country") as string;
 
     const data = {
         Name: name,
@@ -22,7 +22,7 @@ if (Astro.request.method === "POST") {
     console.log(data);
 
     // redirect to the home page
-    await fetch(`${import.meta.env.PUBLIC_LOCATIONS_ROWS_BASE_URL}`, {
+    fetch(`${import.meta.env.PUBLIC_LOCATIONS_ROWS_URL}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
