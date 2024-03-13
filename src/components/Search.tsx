@@ -53,7 +53,7 @@ export default function Search({ headers }: { headers: Headers[] }) {
 				<input onChange={handleChange} className="py-2 px-3 rouded-md bg-slate-100" type="text" placeholder="Search by city name" ref={searchInput} />
 			</div>
 
-			<div className="overflow-x-auto">
+			<div className="overflow-x-auto pb-8">
 				<table className="table w-full">
 					{/* head */}
 					<thead>
