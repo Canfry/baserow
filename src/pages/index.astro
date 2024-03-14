@@ -1,40 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Search from "../components/Search.tsx";
-
-// async function loadData() {
-//     const response = await fetch(`${import.meta.env.LOCATIONS_ROWS_BASE_URL}`, {
-//         headers: {
-//             Authorization: `Token ${import.meta.env.API_KEY}`,
-//         },
-//     });
-//     const data = await response.json();
-//     // console.log(data);
-//     return data;
-// }
+import Layout from '../layouts/Layout.astro';
+import Search from '../components/Search.tsx';
 
 async function loadHeaders() {
-    const response = await fetch(
-        `${import.meta.env.LOCATIONS_FIELDS_URL}`,
-        {
-            headers: {
-                Authorization: `Token ${import.meta.env.API_KEY}`,
-            },
-        },
-    );
-    const data = await response.json();
-    return data;
+  const response = await fetch(`${import.meta.env.LOCATIONS_FIELDS_URL}`, {
+    headers: {
+      Authorization: `Token ${import.meta.env.API_KEY}`,
+    },
+  });
+  const data = await response.json();
+  return data;
 }
 
-/* const { results } = await loadData(); */
 const headers = await loadHeaders();
-/* console.log(results); */
-console.log(headers);
 ---
 
-<Layout title="Interest.">
-    <main class="mt-8 max-w-[90%] m-auto flex-1">
-		<Search client:load headers={headers}/>
-        
-    </main>
+<Layout title='Interest.'>
+  <main class='mt-8 max-w-[90%] m-auto flex-1'>
+    <Search client:load headers={headers} />
+  </main>
 </Layout>
